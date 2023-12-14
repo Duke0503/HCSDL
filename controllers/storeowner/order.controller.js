@@ -76,13 +76,15 @@ try {
 };
 };
 
-//[GET] /store/order/:storeID/confirmAll
+//[POST] /store/order/:storeID/confirmAll
 module.exports.confirmAllOrders = async (req, res) => {
   try {
     let storeID = req.params.storeID;  
     let q = new sql.Request().input('id_store', sql.Int, storeID)
-    const re = await q.execute('update_allOrderItemStatus');
-    console.log('Stored procedure executed successfully:', re);
+    q.query("EXEC update_allOrderItemStatus @id_store", (err) => {
+      if (err) res.json({status: 501, message: "Query Error"})
+      else res.json({status: 200, message: "Confirm Succesful"})
+    });
   } catch(e) {
     console.log(e);
     res.json({status: 500, message: "Query Failed"})
