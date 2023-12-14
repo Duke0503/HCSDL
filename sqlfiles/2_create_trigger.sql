@@ -106,12 +106,12 @@ BEGIN
     WHILE @@FETCH_STATUS = 0
     BEGIN
         UPDATE O_byID
-        SET O_byID.[status] = 'Yes'
+        SET O_byID.[status] = 'Confirmed'
         FROM (SELECT * FROM [Order] O
             WHERE O.[id_order] = @id_order
         ) O_byID
         INNER JOIN (
-            SELECT OI.[id_order], COUNT(CASE WHEN OI.[status] = 'Yes' THEN 1 END) as ConfirmedCount, COUNT(*) as TotalCount 
+            SELECT OI.[id_order], COUNT(CASE WHEN OI.[status] = 'Confirmed' THEN 1 END) as ConfirmedCount, COUNT(*) as TotalCount 
             FROM [OrderItem] OI GROUP BY OI.[id_order]
         ) S ON O_byID.[id_order] = S.[id_order] -- S for Summarize
         WHERE S.ConfirmedCount = S.TotalCount
@@ -148,7 +148,7 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        IF @status = 'Yes'
+        IF @status = 'Confirmed'
         BEGIN
             INSERT INTO [Bill] ([id_order], [id_customer], [totalPrice], [address], [pNumber], [time])
             VALUES

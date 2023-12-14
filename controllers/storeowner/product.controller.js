@@ -33,7 +33,7 @@ var selectProductDetail = (id_product) => {
     });
   });
 }
-//[GET] /store/product/:storeID/:productID
+//[GET] /store/product/:productID
 module.exports.productDetail = async (req, res) => {
   try {
     let productID = req.params.productID;  
