@@ -116,7 +116,7 @@ VALUES
     (N'Làm đẹp', N'Các sản phẩm làm đẹp, mỹ phẩm chăm sóc da chính hãng, có tem phân phối, chất lượng tốt đã qua kiểm định.'),
     (N'Thiết bị thông minh', N'Thiết bị điện tử kết nối thiết bị khác thông qua mạng không dây khác nhau như Bluetooth, NFC, Wi-Fi, 4G..., đem đến sự thông minh cho ngôi nhà bạn'),
     (N'Đồ chơi', N'Thế Giới Đồ Chơi chất lượng, đa dạng mẫu mã, phù hợp mọi độ tuổi.'),
-    (N'Văn phòng phẩm', N'Những vật phẩm đơn giản phục vụ cho các hoạt động văn phòng như: giấy in, sổ, giấy viết, bút, ghim, kẹp, giấy bóng kính, túi nhựa, cặp nhựa, băng dính, hồ dán, phong bì, túi bìa cứng, sổ cặp tài liệu, băng keo giấy...'),
+    (N'Tạp hóa', N'Các thực phẩm tiêu dùng hằng ngày'),
     (N'Sức khỏe', N'Các dụng cụ hỗ trợ sức khỏe (xe lăn, trợ thính, gậy chống...). Các sản phẩm chăm sóc sức khỏe có nhiều thể loại với công dụng khác nhau như: thực phẩm chức năng hỗ trợ trí nhớ, bổ mắt, giảm đau ...');
 GO
 -- Select all data from [Category] to verify
