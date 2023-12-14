@@ -26,8 +26,8 @@ module.exports.index = async (req, res) => {
 // Select 1 product
 var selectProductDetail = (id_product) => {
   return new Promise((resolve, reject) => {
-    var q = new sql.Request().input('ProductID', sql.Int, id_product);
-    q.query("SELECT * FROM [Product] WHERE id_product = @ProductID", (err, rc) => {
+    var q = new sql.Request().input('productID', sql.Int, id_product);
+    q.query("SELECT * FROM [Product] WHERE id_product = @productID", (err, rc) => {
       if (err) return reject(err);
       else return resolve(rc.recordset);
     });
@@ -41,10 +41,10 @@ module.exports.productDetail = async (req, res) => {
     res.send(productDetail);
   } catch(e) {
     console.log(e);
-    res.json({status: 500, message: "Query Failed"})
+    res.json({status: 500, message: "Module Failed"})
   };
 };
-
+// Create 1 Product
  // [POST] /store/product/:storeID/create
  module.exports.addProduct = (req, res) => {
   try {
@@ -58,12 +58,30 @@ module.exports.productDetail = async (req, res) => {
     q.input('imgLink', sql.VarChar, newProduct.imgLink);
     q.input('price', sql.Int, newProduct.price);
     q.input('quantity', sql.Int, newProduct.quantity);
-    q.query("INSERT INTO [Product] (id_store, name, description, id_category, imgLink, price, quantity) VALUES (@id_store, @name, @description, @id_category, @imgLink, @price, @quantity)", (err, st) => {
-      if (err) res.send(err);
-      else res.send("Insert OK");
+    q.query("INSERT INTO [Product] (id_store, name, description, id_category, imgLink, price, quantity) VALUES (@id_store, @name, @description, @id_category, @imgLink, @price, @quantity)", (err) => {
+      if (err) res.json({status: 501, message: "Query Failed"})
+      else res.json({status: 200, message: "Insert Succesful"})
     });
   } catch(e) {
     console.log(e);
-    res.json({status: 501, message: "Insert Data Failed"})
+    res.json({status: 501, message: "Module Corrupted"})
   };
 };
+
+// [GET] /store/product/:storeID/:productID/modify
+module.exports.modifyQuantity = (req, res) => {
+  try {
+    let id_product = req.params.productID;
+    let qtt = req.body.quantity;
+    var q = new sql.Request().input('id_product', sql.Int, id_product);
+    q.input('quantity', sql.NVarChar, qtt);
+    q.query("UPDATE [Product] SET quantity = @quantity WHERE id_product = @id_product", (err) => {
+      if (err) res.json({status: 501, message: "Query Failed"})
+      else res.json({status: 200, message: "Insert Succesful"})
+    });
+  } catch(e) {
+    console.log(e);
+    res.json({status: 501, message: "Module Corrupted"})
+  };
+};
+

@@ -56,6 +56,15 @@ var selectAllConfirmedOrder = (id_store) => {
   });
 }
 //[GET] /store/order/:storeID/confirmed
+var selectAllConfirmedOrder = (id_store) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request().input('StoreID', sql.Int, id_store);
+    q.query("SELECT * FROM store_confirmedOrderItem(@StoreID)", (err, rc) => {
+      if (err) return reject(err);
+      else return resolve(rc.recordset);
+    });
+  });
+}
 module.exports.confirmedOrder = async (req, res) => {
 try {
   let storeID = req.params.storeID;  
@@ -66,3 +75,16 @@ try {
   res.json({status: 500, message: "Query Failed"})
 };
 };
+
+//[GET] /store/order/:storeID/confirmAll
+module.exports.confirmAllOrders = async (req, res) => {
+  try {
+    let storeID = req.params.storeID;  
+    let q = new sql.Request().input('id_store', sql.Int, storeID)
+    const re = await q.execute('update_allOrderItemStatus');
+    console.log('Stored procedure executed successfully:', re);
+  } catch(e) {
+    console.log(e);
+    res.json({status: 500, message: "Query Failed"})
+  };
+  };

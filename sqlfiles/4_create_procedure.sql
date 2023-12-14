@@ -1,13 +1,13 @@
 USE [DB_HBTT]
 GO
 
--- Procedure update all OrderItem.status to 'Yes' when store click button 'Confirm all orders'
+-- Procedure update all OrderItem.status to 'Confirmed' when store click button 'Confirm all orders'
 CREATE PROCEDURE update_allOrderItemStatus
     @id_store INT
 AS
 BEGIN
     UPDATE OI
-    SET OI.[status] = 'Yes'
+    SET OI.[status] = 'Confirmed'
     FROM [OrderItem] OI, [Product] P
     WHERE (
         OI.[id_product] = P.[id_product]

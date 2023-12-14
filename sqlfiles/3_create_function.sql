@@ -255,3 +255,32 @@ RETURN
     WHERE P.[id_store] = @id_store AND OI.[status] = 'Confirmed'
 )
 GO
+
+
+-- Function return list of discount and their reduced price
+CREATE TYPE cartID AS TABLE
+(
+    id_cart INT
+)
+GO
+CREATE FUNCTION suitableDiscount (
+    @cart cartID READONLY
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT D.id_discount, D.dateStart, D.dateEnd, D.id_category, D.discountPercent, D.discountMoney, D.maxDiscount, D.minBill
+    FROM [Discount] D, @cart C, [Product] P
+    WHERE
+    (
+        P.[id_product] = C.id_cart
+        AND (D.[id_category] = P.[id_category] OR D.[id_category] = NULL)
+    )
+)
+GO
+-- sample
+DECLARE @cart2 cartID
+insert into @cart2 
+VALUES (300000001)
+SELECT * from suitableDiscount(@cart2)
