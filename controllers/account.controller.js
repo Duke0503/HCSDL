@@ -96,6 +96,8 @@ module.exports.searchAccount = async (req, res) => {
     let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
+      element.address = [];
+      element.pNum = []
       emailData.forEach(ele => {
         if (element.id_user == ele.id_user){
           element.email.push(ele.email);
@@ -112,6 +114,7 @@ module.exports.searchAccount = async (req, res) => {
         };
       });
     });
+    console.log(emailData);
 
     res.json({status: 200, data: userData});
   } catch(e) {
@@ -139,6 +142,8 @@ module.exports.searchType = async (req, res) => {
     let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
+      element.address = [];
+      element.pNum = []
       emailData.forEach(ele => {
         if (element.id_user == ele.id_user){
           element.email.push(ele.email);
@@ -187,6 +192,8 @@ module.exports.search = async (req, res) => {
     let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
+      element.address = [];
+      element.pNum = []
       emailData.forEach(ele => {
         if (element.id_user == ele.id_user){
           element.email.push(ele.email);
@@ -211,16 +218,18 @@ module.exports.search = async (req, res) => {
   };
 };
 
-// [DELETE] /admin/delete/:id
+// [DELETE] /admin/accounts/deleteUser/:id
 
-var tryDeleteUser = (id) => {
-  return new Promise((resolve, reject) => {
-    var q = new sql.Request()
-      .input('n', sql.VarChar, `%${id}%`);
-
-    q.query("select * from Users where name LIKE @n and usertype LIKE @t", (err, rc) => {
-      if (err) return reject(err);
-      else return resolve(rc.recordset);
-    });
-  });
-};
+module.exports.tmpDelete = async (req, res) => {
+  try {
+    let id = req.params.id;
+    var q = new sql.Request().input('id', sql.Int, id);
+    q.query("exec delete_customer @id", (err, rc) => {
+      if (err) res.json({status: 405, message: "Cant delete user"});
+      else res.json({status: 204, message: rc.recordset[0]});
+    })
+  } catch(e) {
+    console.log(e);
+    res.json({status: 500, message: "Query Failed"});
+  };
+}

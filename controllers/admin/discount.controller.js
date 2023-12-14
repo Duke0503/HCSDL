@@ -15,10 +15,10 @@ module.exports.index = async (req, res) => {
   try {
     let discountData = await selectDiscount();
 
-    res.send(discountData);
+    res.json({status: 200, data: discountData});
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"});
   };
 };
 
@@ -39,11 +39,11 @@ module.exports.addDiscount = (req, res) => {
     q.input('quantity', sql.Int, nDiscount.quantity);
     console.log(nDiscount);
     q.query("INSERT INTO [Discount] (id_category, dateStart, dateEnd, discountPercent, discountMoney, maxDiscount, minBill, quantity) VALUES (@id_category, @dateStart, @dateEnd, @discountPercent, @discountMoney, @maxDiscount, @minBill, @quantity)", (err, st) => {
-      if (err) res.send(err);
-      else res.send("Insert OK");
+      if (err) res.json({status: 501, message: "Insert Failed"});
+      else res.json({status: 201, message: "Inserted"});
     });
   } catch(e) {
     console.log(e);
-    res.status(501).send("Insert Data Failed");
+    res.json({status: 502, message: "Module Corrupted"});
   };
 };
