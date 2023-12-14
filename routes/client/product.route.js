@@ -7,6 +7,9 @@ router.get("/", controller.index);
 
 router.get("/detail/:id", controller.detail);
 
-router.get("/search/:searchString?/:id_category?/:min_price?/:max_price?/:searchType?", controller.filter);
+router.get(
+  "/search/:searchString?/:id_category?/:min_price?/:max_price?/:searchType?",
+  controller.filter
+);
 
-module.exports = router;    
+module.exports = router;

@@ -36,12 +36,27 @@ var selectProductDetail = (id_product) => {
     );
   });
 };
+// Select all rating product
+var selectProductRating = (id_product) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request().input("productID", sql.Int, id_product);
+    q.query(
+      "SELECT * FROM [rating] WHERE id_product = @productID",
+      (err, rc) => {
+        if (err) return reject(err);
+        else return resolve(rc.recordset);
+      }
+    );
+  });
+};
+
 //[GET] /store/product/:productID
 module.exports.productDetail = async (req, res) => {
   try {
     let productID = req.params.productID;
     let productDetail = await selectProductDetail(productID);
-    res.json({ status: 200, products: productDetail });
+    let productRating = await selectProductRating(productID);
+    res.json({ status: 200, products: productDetail, ratings: productRating });
   } catch (e) {
     console.log(e);
     res.json({ status: 500, message: "Module Failed" });
