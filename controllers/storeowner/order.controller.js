@@ -16,7 +16,7 @@ module.exports.index = async (req, res) => {
   try {
     let storeID = req.params.storeID;  
     let orderData = await selectAllOrder(storeID);  
-    res.send(orderData);
+    res.json({status: 200, allOrders: orderData});
   } catch(e) {
     console.log(e);
     res.status(500).send('Query Failed!');
@@ -37,7 +37,7 @@ var selectAllWaitingOrder = (id_store) => {
 module.exports.waitingOrder = async (req, res) => {
 try {
   let storeID = req.params.storeID;  
-  let waitingOrderData = await selectAllWaitingOrder(storeID);  
+  res.json({status: 200, waitingOrders: waitingOrderData});
   res.send(waitingOrderData);
 } catch(e) {
   console.log(e);
@@ -69,7 +69,7 @@ module.exports.confirmedOrder = async (req, res) => {
 try {
   let storeID = req.params.storeID;  
   let confirmedOrderData = await selectAllConfirmedOrder(storeID);  
-  res.send(confirmedOrderData);
+  res.json({status: 200, confirmedOrders: confirmedOrderData});
 } catch(e) {
   console.log(e);
   res.json({status: 500, message: "Query Failed"})

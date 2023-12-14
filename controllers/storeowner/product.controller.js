@@ -16,7 +16,7 @@ module.exports.index = async (req, res) => {
   try {
     let storeID = req.params.storeID;  
     let storeProductData = await selectProductStoreData(storeID);  
-    res.send(storeProductData);
+    res.json({status: 200, products: storeProductData});
   } catch(e) {
     console.log(e);
     res.json({status: 500, message: "Query Failed"})
@@ -38,7 +38,7 @@ module.exports.productDetail = async (req, res) => {
   try {
     let productID = req.params.productID;  
     let productDetail = await selectProductDetail(productID);  
-    res.send(productDetail);
+    res.json({status: 200, products: productDetail});
   } catch(e) {
     console.log(e);
     res.json({status: 500, message: "Module Failed"})
@@ -68,7 +68,7 @@ module.exports.productDetail = async (req, res) => {
   };
 };
 
-// [GET] /store/product/:store/modify
+// [POST] /store/product/:store/modify
 module.exports.modifyQuantity = (req, res) => {
   try {
     let modifyData = req.body;

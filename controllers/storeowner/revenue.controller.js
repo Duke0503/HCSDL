@@ -31,7 +31,7 @@ module.exports.index = async (req, res) => {
             prod: productRevenue,
             sum: tRevenue
         }
-        res.send(st);
+        res.json({status: 200, st});
         // res.send(tRevenue);
     }
     catch (e)
