@@ -11,6 +11,7 @@ const systemConfig = require("./config/system");
 
 const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
+const routeStoreOwner = require("./routes/storeowner/index.route");
 
 database.connect();
 
@@ -29,6 +30,7 @@ app.use(express.static(`${__dirname}/public`));
 // Routes
 routeAdmin(app);
 route(app);
+routeStoreOwner(app);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
