@@ -28,7 +28,7 @@ app.use(express.static(`${__dirname}/public`));
 
 // Routes
 routeAdmin(app);
-// route(app);
+route(app);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
