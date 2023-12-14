@@ -41,7 +41,7 @@ module.exports.addDiscount = (req, res) => {
     q.input('quantity', sql.Int, nDiscount.quantity);
     console.log(nDiscount);
     q.query("INSERT INTO [Discount] (id_category, dateStart, dateEnd, discountPercent, discountMoney, maxDiscount, minBill, quantity) VALUES (@id_category, @dateStart, @dateEnd, @discountPercent, @discountMoney, @maxDiscount, @minBill, @quantity)", (err, st) => {
-      if (err) res.send.log(err);
+      if (err) res.send(err);
       else res.send("Insert OK");
     });
   } catch(e) {
