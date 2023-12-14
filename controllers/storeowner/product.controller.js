@@ -19,7 +19,7 @@ module.exports.index = async (req, res) => {
     res.send(storeProductData);
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"})
   };
 };
   
@@ -41,6 +41,29 @@ module.exports.productDetail = async (req, res) => {
     res.send(productDetail);
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"})
+  };
+};
+
+ // [POST] /store/product/:storeID/create
+ module.exports.addProduct = (req, res) => {
+  try {
+    let newProduct = req.body;
+    let id_store = req.params.storeID;
+    console.log(newProduct);
+    var q = new sql.Request().input('id_store', sql.Int, id_store);
+    q.input('name', sql.NVarChar, newProduct.name);
+    q.input('description', sql.NVarChar, newProduct.description);
+    q.input('id_category', sql.Int, newProduct.id_category);
+    q.input('imgLink', sql.VarChar, newProduct.imgLink);
+    q.input('price', sql.Int, newProduct.price);
+    q.input('quantity', sql.Int, newProduct.quantity);
+    q.query("INSERT INTO [Product] (id_store, name, description, id_category, imgLink, price, quantity) VALUES (@id_store, @name, @description, @id_category, @imgLink, @price, @quantity)", (err, st) => {
+      if (err) res.send(err);
+      else res.send("Insert OK");
+    });
+  } catch(e) {
+    console.log(e);
+    res.json({status: 501, message: "Insert Data Failed"})
   };
 };
