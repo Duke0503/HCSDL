@@ -5,8 +5,8 @@ const controller = require("../../controllers/client/product.controller");
 
 router.get("/", controller.index);
 
-router.get("/search/:searchString/:id_category/:min_price/:max_price/:searchType", controller.filter);
+router.get("/detail/:id", controller.detail);
 
-router.get("/search/:searchString", controller.filter);
+router.get("/search/:searchString/:id_category?/:min_price?/:max_price?/:searchType?", controller.filter);
 
 module.exports = router;

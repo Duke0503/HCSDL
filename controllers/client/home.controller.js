@@ -82,16 +82,47 @@ module.exports.registerPost = async (req, res) => {
     q.input('email', sql.VarChar(50), register.email);
     q.input('address', sql.VarChar(255), register.address);
     q.input('pNumber', sql.Char(10), register.pNumber);
+    q.input('nameStore', sql.NVARCHAR(50), register.nameStore);
 
     // Insert the new user into the [Users]
-    q.query("INSERT INTO [Users] (name, dob, usertype, username, pwd) VALUES (@name, @dob, @usertype, @username, @pwd)", (err, result) => {
-      if (err) {
-        console.log("Error inserting user:", err);
-        return res.status(500).send("Error inserting user");
-      }
-      console.log("User registered successfully!");
-      res.send("User registered successfully!");
+    const userResult = await q.query(`
+      INSERT INTO [Users] (name, dob, usertype, username, pwd)
+      OUTPUT INSERTED.id_user
+      VALUES (@name, @dob, @usertype, @username, @pwd)
+    `);
+    
+    const id_user = userResult.recordset[0].id_user;
+    console.log(id_user);
+
+    q.input('id_user', sql.Int, id_user);
+    // Insert phone number into [User_Pnumber]
+    await q.query("INSERT INTO [User_Pnumber] (id_user, pNumber) VALUES (@id_user, @pNumber)", {
+      id_user: id_user,
+      pNumber: register.pNumber,
     });
+
+    // Insert phone number into [User_Address]
+    await q.query("INSERT INTO [User_Address] (id_user, address) VALUES (@id_user, @address)", {
+      id_user: id_user,
+      address: register.address,
+    });
+
+    // Insert phone number into [User_Address]
+    await q.query("INSERT INTO [User_Email] (id_user, email) VALUES (@id_user, @email)", {
+      id_user: id_user,
+      address: register.email,
+    });
+
+    // Check if nameStore is different from NULL and insert id_user and namestore to Store table
+    if (register.nameStore) {
+      await q.query("INSERT INTO [Store] (id_owner, name) VALUES (@id_user, @nameStore)", {
+        id_user: id_user,
+        nameStore: register.nameStore,
+      });
+    }
+
+    res.json({ status: 200, message: "Register Successful!", id_user });
+
   } catch (e) {
     console.log("Error:", e);
     res.status(500).send("Error registering user");

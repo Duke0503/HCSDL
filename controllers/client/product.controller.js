@@ -40,6 +40,43 @@ module.exports.index = async (req, res) => {
   };
 };
 
+var selectProductDataDetail = (ID) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request().input('ID', sql.Int, ID);
+    q.query('SELECT * FROM Product WHERE id_product = @ID', (err, rc) => {
+      if (err) return reject(err);
+      else return resolve(rc.recordset);
+    });
+  });  
+};
+
+var selectRatingData = (ID) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request().input('ID', sql.Int, ID);
+    q.query('SELECT * FROM Rating WHERE id_product = @ID', (err, rc) => {
+      if (err) return reject(err);
+      else return resolve(rc.recordset);
+    });
+  });  
+};
+
+// [GET] products/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const id_product = req.params.id;
+    const productDetail = await selectProductDataDetail(id_product);
+    const productRating = await selectRatingData(id_product);
+    const data = {
+      ProductDetail : productDetail,
+      ProductRating :productRating,
+    };
+    res.json(data);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send('Query Failed!');
+  }
+};
+
 var selectFilter = (searchString, id_category, min_price, max_price, searchType) => {
   return new Promise ((resolve, reject) => {
     var q = new sql.Request();
@@ -73,4 +110,4 @@ module.exports.filter = async (req, res) => {
     console.log(e);
     res.status(500).send('Query Failed!');
   }
-}
+};
