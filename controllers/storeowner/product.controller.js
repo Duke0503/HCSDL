@@ -16,7 +16,7 @@ module.exports.index = async (req, res) => {
   try {
     let storeID = req.params.storeID;  
     let storeProductData = await selectProductStoreData(storeID);  
-    res.send(storeProductData);
+    res.json({status: 200, products: storeProductData});
   } catch(e) {
     console.log(e);
     res.json({status: 500, message: "Query Failed"})
@@ -33,12 +33,12 @@ var selectProductDetail = (id_product) => {
     });
   });
 }
-//[GET] /store/product/:storeID/:productID
+//[GET] /store/product/:productID
 module.exports.productDetail = async (req, res) => {
   try {
     let productID = req.params.productID;  
     let productDetail = await selectProductDetail(productID);  
-    res.send(productDetail);
+    res.json({status: 200, products: productDetail});
   } catch(e) {
     console.log(e);
     res.json({status: 500, message: "Module Failed"})
@@ -68,16 +68,16 @@ module.exports.productDetail = async (req, res) => {
   };
 };
 
-// [GET] /store/product/:storeID/:productID/modify
+// [POST] /store/product/:store/modify
 module.exports.modifyQuantity = (req, res) => {
   try {
-    let id_product = req.params.productID;
-    let qtt = req.body.quantity;
-    var q = new sql.Request().input('id_product', sql.Int, id_product);
-    q.input('quantity', sql.NVarChar, qtt);
+    let modifyData = req.body;
+    var q = new sql.Request();
+    q.input('id_product', sql.Int, modifyData.id_product);
+    q.input('quantity', sql.Int, modifyData.quantity);
     q.query("UPDATE [Product] SET quantity = @quantity WHERE id_product = @id_product", (err) => {
-      if (err) res.json({status: 501, message: "Query Failed"})
-      else res.json({status: 200, message: "Insert Succesful"})
+      if (err) res.json({status: 501, message: "Query Error"})
+      else res.json({status: 200, message: "Modify Succesful"})
     });
   } catch(e) {
     console.log(e);

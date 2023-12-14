@@ -7,6 +7,6 @@ router.get("/:storeID", controller.index);
 router.get("/:storeID/:productID", controller.productDetail);
 router.post("/:storeID/create", controller.addProduct);
 
-//router.post("/:productID/modify", controller.modifyQuantity);
+router.post("/modify", controller.modifyQuantity);
 
 module.exports = router;

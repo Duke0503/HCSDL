@@ -113,7 +113,7 @@ VALUES
 GO
 -- Select all data from [Product] to verify
 -- SELECT * FROM [Product];
-
+UPDATE [Product] SET quantity = 111 WHERE id_product = 300000011
 -- Insert 10 tuples of sample data into [Rating] table
 INSERT INTO [Rating] ([id_customer], [id_product], [detail], [ratingStar])
 VALUES
