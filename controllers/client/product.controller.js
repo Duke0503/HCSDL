@@ -96,12 +96,15 @@ var selectFilter = (searchString, id_category, min_price, max_price, searchType)
 module.exports.filter = async (req, res) => {
   try {
     let searchString = req.params.searchString;
+
+    if(searchString === "null") {
+      searchString = '';
+    }
+    
     let id_category = parseInt(req.params.id_category);
     let min_price = parseInt(req.params.min_price);
     let max_price = parseInt(req.params.max_price);
     let searchType = req.params.searchType;
-    console.log(searchString);
-    console.log(id_category);
     
     const products = await selectFilter(searchString, id_category, min_price, max_price, searchType);
 
@@ -111,3 +114,4 @@ module.exports.filter = async (req, res) => {
     res.status(500).send('Query Failed!');
   }
 };
+

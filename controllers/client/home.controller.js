@@ -129,12 +129,20 @@ module.exports.registerPost = async (req, res) => {
   }
 };
 
+var selectStoreData = (ID) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request().input('ID', sql.Int, ID);
+    q.query('SELECT * FROM [Store] WHERE id_owner = @ID', (err, rc) => {
+      if (err) return reject(err);
+      else return resolve(rc.recordset);
+    });
+  });  
+};
 // [POST] /login
 module.exports.loginPost = async (req, res) => {
   try {
     let loginData = req.body;
     
-    console.log(req.body.username);
     // Call selectUserData function to fetch user data
     let userData = await selectUserData();
 
@@ -144,12 +152,14 @@ module.exports.loginPost = async (req, res) => {
         element.username === loginData.username &&
         element.pwd === loginData.pwd
     );
-    
+  
     if (!userMatch) {
       console.log("Username and password combination does not exist!");
       return res.status(401).send("Invalid username or password!");
     }
 
+    const storeData = await selectStoreData(userMatch.id_user);
+    
     // Fetch additional information for the logged-in user
     let emailData = await selectEmailData(userMatch.id_user);
     let addressData = await selectAddressData(userMatch.id_user);
@@ -157,6 +167,7 @@ module.exports.loginPost = async (req, res) => {
 
     // Construct the user information object
     const userInfo = {
+      store: storeData,
       id_user: userMatch.id_user,
       name: userMatch.name,
       dob: userMatch.dob,
