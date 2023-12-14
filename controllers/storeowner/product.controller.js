@@ -69,14 +69,17 @@ module.exports.productDetail = async (req, res) => {
 };
 
 // [POST] /store/product/:store/modify
-module.exports.modifyQuantity = (req, res) => {
+module.exports.modifyProduct = (req, res) => {
   try {
     let modifyData = req.body;
     var q = new sql.Request();
     q.input('id_product', sql.Int, modifyData.id_product);
+    q.input('name', sql.NVarChar, modifyData.name);
+    q.input('price', sql.Int, modifyData.price);
     q.input('quantity', sql.Int, modifyData.quantity);
-    q.query("UPDATE [Product] SET quantity = @quantity WHERE id_product = @id_product", (err) => {
-      if (err) res.json({status: 501, message: "Query Error"})
+    q.input('description', sql.NVarChar, modifyData.description);
+    q.query("UPDATE [Product] SET name = @name, price = @price, quantity = @quantity, description = @description WHERE id_product = @id_product", (err) => {
+      if (err) res.json({status: 501, message: "Query Error", error: err})
       else res.json({status: 200, message: "Modify Succesful"})
     });
   } catch(e) {

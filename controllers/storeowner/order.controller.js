@@ -37,8 +37,8 @@ var selectAllWaitingOrder = (id_store) => {
 module.exports.waitingOrder = async (req, res) => {
 try {
   let storeID = req.params.storeID;  
+  let waitingOrderData = await selectAllWaitingOrder(storeID); 
   res.json({status: 200, waitingOrders: waitingOrderData});
-  res.send(waitingOrderData);
 } catch(e) {
   console.log(e);
   res.status(500).send('Query Failed!');
@@ -56,23 +56,14 @@ var selectAllConfirmedOrder = (id_store) => {
   });
 }
 //[GET] /store/order/:storeID/confirmed
-var selectAllConfirmedOrder = (id_store) => {
-  return new Promise((resolve, reject) => {
-    var q = new sql.Request().input('StoreID', sql.Int, id_store);
-    q.query("SELECT * FROM store_confirmedOrderItem(@StoreID)", (err, rc) => {
-      if (err) return reject(err);
-      else return resolve(rc.recordset);
-    });
-  });
-}
 module.exports.confirmedOrder = async (req, res) => {
 try {
   let storeID = req.params.storeID;  
-  let confirmedOrderData = await selectAllConfirmedOrder(storeID);  
-  res.json({status: 200, confirmedOrders: confirmedOrderData});
+  let confirmedOrderData = await selectAllConfirmedOrder(storeID); 
+  res.json({status: 200, waitingOrders: confirmedOrderData});
 } catch(e) {
   console.log(e);
-  res.json({status: 500, message: "Query Failed"})
+  res.status(500).send('Query Failed!');
 };
 };
 
@@ -90,3 +81,20 @@ module.exports.confirmAllOrders = async (req, res) => {
     res.json({status: 500, message: "Query Failed"})
   };
   };
+
+  module.exports.confirmOne = async (req, res) => {
+    try {
+      let orderItem = req.body;
+      let q = new sql.Request();
+      q.input('id_order', sql.Int, orderItem.id_order);
+      q.input('id_product', sql.Int, orderItem.id_product);
+      q.query("UPDATE OrderItem SET status = 'Confirmed' WHERE id_order = @id_order AND id_product = @id_product", (err) => {
+      if (err) res.json({status: 500, message: "Query Failed"});
+      else res.json({status: 200, message: "Confirm Succesfull"})
+      });
+    }
+      catch(e) {
+      console.log(e);
+      res.json({status: 500, message: "Module crashed", error: e})
+    };
+    };
