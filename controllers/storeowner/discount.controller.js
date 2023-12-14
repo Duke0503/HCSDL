@@ -38,11 +38,11 @@ var selectDiscount = () => {
       q.input('quantity', sql.Int, nDiscount.quantity);
       console.log(nDiscount);
       q.query("INSERT INTO [Discount] (id_category, dateStart, dateEnd, discountPercent, discountMoney, maxDiscount, minBill, quantity) VALUES (@id_category, @dateStart, @dateEnd, @discountPercent, @discountMoney, @maxDiscount, @minBill, @quantity)", (err, st) => {
-        if (err) res.send(err);
-        else res.send("Insert OK");
+        if (err) res.json({status: 500, message: "Query Failed", error: err})
+        else res.json({status: 200, message: "Insert Succesful"})
       });
     } catch(e) {
       console.log(e);
-      res.json({status: 501, message: "Insert Data Failed"})
+      res.json({status: 501, message: "Insert Data Failed", error: e})
     };
   };
