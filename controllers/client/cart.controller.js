@@ -26,4 +26,26 @@ module.exports.index = async (req, res) => {
   }
 }
 
-// [POST] /cart
+// [POST] /cart/add
+module.exports.addCart = async (req, res) => {
+  try {
+    var cart = req.body;
+
+    var q = new sql.Request();
+    q.input('id_user', sql.Int, parseInt(cart.id_user));
+    q.input('id_product', sql.Int, parseInt(cart.id_product));
+    q.input('quantity', sql.Int, parseInt(cart.quantity));
+    q.input('totalPrice', sql.Int, parseInt(cart.totalPrice));
+
+    await q.query(`
+      INSERT INTO [CartItem] (id_user, id_product, quantity, totalPrice)
+      VALUES (@id_user, @id_product, @quantity, @totalPrice)
+    `);
+
+    res.send({ status: "200", message: "Adding Cart Successful!" });
+
+  } catch (e) {
+    console.log(e);
+    res.send({ status: "500", message: "Error Query!" });
+  }
+};
