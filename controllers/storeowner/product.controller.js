@@ -11,7 +11,7 @@ var selectProductStoreData = (id_store) => {
     });
   });
 }
-  //[GET] /store/:storeID
+  //[GET] /store/product/:storeID
 module.exports.index = async (req, res) => {
   try {
     let storeID = req.params.storeID;  
@@ -33,7 +33,7 @@ var selectProductDetail = (id_product) => {
     });
   });
 }
-//[GET] /store/:storeID/:productID
+//[GET] /store/product/:storeID/:productID
 module.exports.productDetail = async (req, res) => {
   try {
     let productID = req.params.productID;  
