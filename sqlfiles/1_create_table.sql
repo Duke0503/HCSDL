@@ -183,7 +183,7 @@ CREATE TABLE [Order]
     [id_customer] INT,
     [id_discount] INT,
     [id_pMethod] INT,
-    [totalPrice] INT,
+    [totalPrice] INT DEFAULT 0,
     [address] NVARCHAR(255) NOT NULL,
     [pNumber] VARCHAR(10) NOT NULL,
     [status] VARCHAR(10) DEFAULT 'Waiting',

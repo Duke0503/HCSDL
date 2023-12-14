@@ -5,7 +5,7 @@ const sql = require('mssql');
 var selectAllOrder = (id_store) => {
     return new Promise((resolve, reject) => {
       var q = new sql.Request().input('StoreID', sql.Int, id_store);
-      q.query("SELECT * FROM store_allOrderItem(@StoreID)", (err, rc) => {
+      q.query("SELECT OI.[id_order], OI.[id_product], P.[name], OI.[quantity], OI.[totalPrice], OI.[status] FROM [OrderItem] OI INNER JOIN [Product] P ON P.[id_product] = OI.[id_product] WHERE P.[id_store] = @StoreID", (err, rc) => {
         if (err) return reject(err);
         else return resolve(rc.recordset);
       });
@@ -27,7 +27,7 @@ module.exports.index = async (req, res) => {
 var selectAllWaitingOrder = (id_store) => {
   return new Promise((resolve, reject) => {
     var q = new sql.Request().input('StoreID', sql.Int, id_store);
-    q.query("SELECT * FROM store_waitingOrderItem(@StoreID)", (err, rc) => {
+    q.query("SELECT OI.[id_order], OI.[id_product], P.[name], OI.[quantity], OI.[totalPrice], OI.[status] FROM [OrderItem] OI INNER JOIN [Product] P ON P.[id_product] = OI.[id_product] WHERE P.[id_store] = @StoreID AND OI.[status] = 'Waiting'", (err, rc) => {
       if (err) return reject(err);
       else return resolve(rc.recordset);
     });
@@ -49,7 +49,7 @@ try {
 var selectAllConfirmedOrder = (id_store) => {
   return new Promise((resolve, reject) => {
     var q = new sql.Request().input('StoreID', sql.Int, id_store);
-    q.query("SELECT * FROM store_confirmedOrderItem(@StoreID)", (err, rc) => {
+    q.query("SELECT OI.[id_order], OI.[id_product], P.[name], OI.[quantity], OI.[totalPrice], OI.[status] FROM [OrderItem] OI INNER JOIN [Product] P ON P.[id_product] = OI.[id_product] WHERE P.[id_store] = @StoreID AND OI.[status] = 'Confirmed'", (err, rc) => {
       if (err) return reject(err);
       else return resolve(rc.recordset);
     });

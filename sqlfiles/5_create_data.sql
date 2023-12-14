@@ -4,16 +4,16 @@ GO
 -- Insert 10 tuples into [Users] table
 INSERT INTO [Users] ([name], [dob], [usertype], [username], [pwd])
 VALUES
-    (N'John Doe', '1990-05-15', 'Customer', 'john_doe', 'password1'),
-    (N'Jane Smith', '1985-08-20', 'Store Owner', 'jane_smith', 'securepwd2'),
-    (N'Bob Johnson', '2000-03-10', 'Admin', 'bob_j', 'admin123'),
-    (N'Alice Brown', '1998-11-25', 'Customer', 'alice_b', 'Customerpass'),
-    (N'David White', '1995-07-03', 'Store Owner', 'david_w', 'storepwd'),
-    (N'Eva Green', '1987-12-18', 'Customer', 'eva_g', 'mypassword'),
-    (N'Mark Wilson', '1992-09-08', 'Admin', 'mark_w', 'pass1234'),
-    (N'Susan Lee', '2001-04-30', 'Customer', 'susan_l', 'secure123'),
-    (N'Alex Turner', '1983-06-22', 'Store Owner', 'alex_t', 'turnerpass'),
-    (N'Linda Adams', '1994-02-14', 'Customer', 'linda_a', 'mypwd');
+    (N'Nguyễn Văn A', '1990-05-15', 'Customer', 'nva', '123'),
+    (N'Trần Thị B', '1985-08-20', 'Customer', 'ttb', '123'),
+    (N'Lê Văn C', '2000-03-10', 'Customer', 'lvc', '123'),
+    (N'Phạm Thị D', '1998-11-25', 'Customer', 'ptd', '123'),
+    (N'Hồ Văn E', '1995-07-03', 'Customer', 'hve', '123'),
+    (N'Đặng Thị F', '1987-12-18', 'Customer', 'dtf', '123'),
+    (N'Vũ Văn G', '1992-09-08', 'Store Owner', 'vvg', '123'),
+    (N'Ngô Thị H', '2001-04-30', 'Store Owner', 'nth', '123'),
+    (N'Lý Văn I', '1983-06-22', 'Store Owner', 'lvi', '123'),
+    (N'Mai Thị K', '1994-02-14', 'Admin', 'mtk', '123');
 GO
 -- Select all data from [Users] to verify
 -- SELECT * FROM [Users];
@@ -21,16 +21,20 @@ GO
 -- Insert sample data into [User_Email] table
 INSERT INTO [User_Email] ([id_user], [email])
 VALUES
-    (100000001, 'john_doe@example.com'),
-    (100000002, 'jane_smith@example.com'),
-    (100000003, 'bob_j@example.com'),
-    (100000004, 'alice_b@example.com'),
-    (100000005, 'david_w@example.com'),
-    (100000006, 'eva_g@example.com'),
-    (100000007, 'mark_w@example.com'),
-    (100000008, 'susan_l@example.com'),
-    (100000009, 'alex_t@example.com'),
-    (100000010, 'linda_a@example.com');
+    (100000001, 'nva1@gmail.com'),
+    (100000001, 'nva2@gmail.com'),
+    (100000002, 'ttb@gmail.com'),
+    (100000003, 'lvc@gmail.com'),
+    (100000004, 'ptd1@gmail.com'),
+    (100000004, 'ptd2@gmail.com'),
+    (100000005, 'hve@gmail.com'),
+    (100000006, 'dtf@gmail.com'),
+    (100000007, 'vvg@gmail.com'),
+    (100000008, 'nth1@gmail.com'),
+    (100000008, 'bth2@gmail.com'),
+    (100000009, 'lvi1@gmail.com'),
+    (100000009, 'lvi2@gmail.com'),
+    (100000010, 'mtk@gmail.com');
 GO
 -- Select all data from [User_Email] to verify
 -- SELECT * FROM [User_Email];
@@ -55,26 +59,28 @@ GO
 -- Insert sample data into [User_Address] table
 INSERT INTO [User_Address] ([id_user], [address])
 VALUES
-    (100000001, N'123 Main Street, CityA'),
-    (100000002, N'456 Oak Avenue, CityB'),
-    (100000003, N'789 Pine Lane, CityC'),
-    (100000004, N'101 Elm Road, CityD'),
-    (100000005, N'222 Maple Drive, CityE'),
-    (100000006, N'333 Cedar Street, CityF'),
-    (100000007, N'444 Birch Avenue, CityG'),
-    (100000008, N'555 Spruce Lane, CityH'),
-    (100000009, N'666 Pine Road, CityI'),
-    (100000010, N'777 Oak Drive, CityJ');
+    (100000001, N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM'),
+    (100000001, N'123 đường Trần Hưng Đạo, Q.1, Tp.HCM'),
+    (100000002, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội'),
+    (100000003, N'Đường số 13, Tân Thuận Đông, Q.7, Tp.HCM'),
+    (100000004, N'15 đường D5 phường 25, Q.Bình Thạnh, Tp.HCM'),
+    (100000005, N'15 đường Trần Phú, phường 3, Tp.Đà Lạt, Lâm Đồng'),
+    (100000006, N'100 Đặng Văn Bi, Bình Thọ, Thủ Đức, Tp.HCM'),
+    (100000007, N'54 đường Nguyễn Lương Bằng, Q.Liên Chiểu, Đà Nẵng'),
+    (100000008, N'56 đường Nguyễn Tất Thành, Q.10, Tp.HCM'),
+    (100000009, N'đường số 13 Tân Thuận Đông, Quận 7, Tp.HCM'),
+    (100000010, N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM');
 GO
+
 -- Select all data from [User_Address] to verify
 -- SELECT * FROM [User_Address];
 
 
 INSERT INTO [Store] ([id_owner], [name])
 VALUES
-    (100000002, N'Electronics Hub'),
-    (100000005, N'Fashion World'),
-    (100000009, N'Home Essentials');
+    (100000007, N'Cửa Hàng Chính Hãng Logitech'),
+    (100000008, N'NowSaiGon'),
+    (100000009, N'Cửa Hàng Đồ Gia Dụng Home Essential');
 GO
 -- Select all data from [Store] to verify
 -- SELECT * FROM [Store];
@@ -82,167 +88,101 @@ GO
 -- Insert sample data into [Category] table
 INSERT INTO [Category] ([name], [description])
 VALUES
-    (N'Electronics', N'Electronic devices and accessories'),
-    (N'Clothing', N'Apparel and fashion accessories'),
-    (N'Home Decor', N'Furniture, decorations, and home accessories'),
-    (N'Books', N'Books of various genres'),
-    (N'Sports', N'Sports equipment and gear'),
-    (N'Beauty', N'Cosmetics and beauty products'),
-    (N'Automotive', N'Auto parts and accessories'),
-    (N'Toys', N'Toys and games for all ages'),
-    (N'Groceries', N'Food and household essentials'),
-    (N'Health', N'Health and wellness products');
+    (N'Điện tử', N'Thiết bị và phụ kiện điện tử'),
+    (N'Quần Áo', N'Quần áo và phụ kiện thời trang'),
+    (N'Trang Trí Nhà Cửa', N'Đồ nội thất, trang trí và phụ kiện nhà cửa'),
+    (N'Sách', N'Sách thuộc nhiều thể loại'),
+    (N'Thể Thao', N'Thiết bị và đồ dùng thể thao'),
+    (N'Làm Đẹp', N'Mỹ phẩm và sản phẩm làm đẹp'),
+    (N'Oto', N'Phụ tùng và phụ kiện ô tô'),
+    (N'Đồ Chơi', N'Đồ chơi và trò chơi cho mọi độ tuổi'),
+    (N'Tiêu Dùng', N'Tiêu dùng và hàng gia dụng cần thiết'),
+    (N'Sức Khỏe', N'Sản phẩm chăm sóc sức khỏe và phong cách sống');
 GO
 -- Select all data from [Category] to verify
 -- SELECT * FROM [Category];
 
 
--- Insert 10 tuples of sample data into [Product] table
+-- Insert sample data into [Product] table
 INSERT INTO [Product] ([id_store], [name], [id_category], [imgLink], [price], [quantity])
 VALUES
-    (200000001, N'Laptop XYZ', 1001, 'laptop_xyz.jpg', 1200, 50),
-    (200000002, N'T-shirt Blue', 1002, 'tshirt_blue.jpg', 25, 100),
-    (200000003, N'Sofa Set', 1003, 'sofa_set.jpg', 800, 20),
-    (200000002, N'Mystery Novel', 1004, 'mystery_novel.jpg', 15, 50),
-    (200000002, N'Tennis Racket', 1005, 'tennis_racket.jpg', 50, 30),
-    (200000001, N'Makeup Kit', 1006, 'makeup_kit.jpg', 40, 40),
-    (200000002, N'Car Accessories Kit', 1007, 'car_accessories.jpg', 100, 15),
-    (200000001, N'Toy Robot', 1008, 'toy_robot.jpg', 30, 80),
-    (200000001, N'Rice Bag', 1009, 'rice_bag.jpg', 10, 200),
-    (200000002, N'Vitamin C Supplement', 1010, 'vitamin_c.jpg', 15, 60);
+    (200000001, N'Bàn Phím Logitech G Pro X', 1001, N'https://example.com/keyboard1.jpg', 2500000, 50),
+    (200000001, N'Chuột Gaming Logitech G502', 1001, N'https://example.com/mouse1.jpg', 800000, 40),
+    (200000001, N'Tai Nghe Logitech G Pro X', 1001, N'https://example.com/headset1.jpg', 1200000, 30),
+    (200000002, N'Bánh Mì Gà Nướng Phô Mai', 1009, N'https://example.com/banhmi1.jpg', 25000, 100),
+    (200000002, N'Cà Phê Sữa Đá', 1009, N'https://example.com/coffee1.jpg', 40000, 150),
+    (200000002, N'Pizza NowSaiGon', 1009, N'https://example.com/pizza1.jpg', 180000, 20),
+    (200000003, N'Bàn Là Hơi Nước', 1003, N'https://example.com/iron1.jpg', 490000, 15),
+    (200000003, N'Nồi Cơm Điện', 1003, N'https://example.com/ricecooker1.jpg', 360000, 25),
+    (200000003, N'Chảo Chống Dính', 1003, N'https://example.com/fryingpan1.jpg', 120000, 35)
 GO
 -- Select all data from [Product] to verify
 -- SELECT * FROM [Product];
-UPDATE [Product] SET quantity = 111 WHERE id_product = 300000011
--- Insert 10 tuples of sample data into [Rating] table
-INSERT INTO [Rating] ([id_customer], [id_product], [detail], [ratingStar])
-VALUES
-    (100000001, 300000001, N'Great laptop!', 4),
-    (100000002, 300000002, N'Nice T-shirt, fits well.', 3),
-    (100000003, 300000003, N'Comfortable sofa set.', 4),
-    (100000004, 300000004, N'Exciting mystery novel!', 3),
-    (100000005, 300000005, N'Excellent tennis racket!', 4),
-    (100000006, 300000006, N'Love this makeup kit!', 4),
-    (100000007, 300000007, N'Great car accessories kit!', 4),
-    (100000008, 300000008, N'Fun toy robot for kids.', 3),
-    (100000009, 300000009, N'Quality rice bag.', 4),
-    (100000010, 300000010, N'Good vitamin C supplement.', 4);
-GO
--- Select all data from [Rating] to verify
--- SELECT * FROM [Rating];
 
--- Insert 5 tuples of sample data into [CartItem] table
-INSERT INTO [CartItem] ([id_user], [id_product], [quantity], [totalPrice])
-VALUES
-    (100000001, 300000001, 2, 2400),  -- 2 laptops in the cart
-    (100000002, 300000002, 3, 75),    -- 3 T-shirts in the cart
-    (100000003, 300000003, 1, 800),   -- 1 sofa set in the cart
-    (100000004, 300000004, 5, 75),    -- 5 mystery novels in the cart
-    (100000005, 300000005, 2, 100);   -- 2 tennis rackets in the cart
-GO
--- Select all data from [CartItem] to verify
--- SELECT * FROM [CartItem];
-
--- Insert 5 tuples of sample data into [Discount] table
+-- Insert sample data into [Discount] table
 INSERT INTO [Discount] ([id_category], [dateStart], [dateEnd], [discountPercent], [discountMoney], [maxDiscount], [minBill], [quantity])
 VALUES
-    (1001, '2023-04-01', '2023-04-10', 0.15, NULL, 200000, 60000, 100), -- 15% off on Electronics for 10 days
-    (1002, '2023-04-05', '2023-04-15', NULL, 50, 150000, 80000, 50),  -- $50 off on Clothing for 10 days
-    (1003, '2023-04-10', '2023-04-20', 0.20, NULL, 250000, 70000, 75),  -- 20% off on Home Decor for 10 days
-    (1004, '2023-04-15', '2023-04-25', NULL, 30, 180000, 55000, 40),  -- $30 off on Books for 10 days
-    (1005, '2023-04-20', '2023-04-30', 0.18, NULL, 220000, 65000, 60);  -- 18% off on Sports for 10 days
+    (1001, '2023-01-01', '2024-01-31', 0.1, 0, 50000, 100000, 50),
+    (1002, '2023-02-01', '2024-02-28', 0.15, 0, 75000, 120000, 30),
+    (1003, '2023-03-01', '2024-03-31', 0.20, 0, 100000, 150000, 20),
+    (1004, '2023-04-01', '2024-04-30', 0.25, 0, 120000, 180000, 15),
+    (1005, '2023-05-01', '2024-05-31', 0.30, 0, 150000, 200000, 10),
+    (1006, '2023-06-01', '2024-06-30', 0, 10000, 30000, 50000, 100),
+    (1007, '2023-07-01', '2024-07-31', 0, 20000, 50000, 80000, 80),
+    (1008, '2023-08-01', '2024-08-31', 0, 30000, 75000, 100000, 60),
+    (1009, '2023-09-01', '2024-09-30', 0, 40000, 100000, 120000, 40),
+    (1010, '2023-10-01', '2024-10-31', 0, 50000, 120000, 150000, 30);
 GO
 -- Select all data from [Discount] to verify
 -- SELECT * FROM [Discount];
 
--- Insert 3 tuples of sample data into [PaymentMethod] table
+-- Insert of sample data into [PaymentMethod] table
 INSERT INTO [PaymentMethod] ([name])
 VALUES
-    (N'Credit Card'),
+    (N'Thẻ Tín Dụng'),
+    (N'Thẻ Ghi Nợ'),
     (N'PayPal'),
-    (N'Bank Transfer');
+    (N'Chuyển Khoản Ngân Hàng'),
+    (N'Thanh Toán Bằng Tiền Mặt');
 GO
 -- Select all data from [PaymentMethod] to verify
 -- SELECT * FROM [PaymentMethod];
 
--- Insert 5 tuples of sample data into [Order] table
-INSERT INTO [Order] ([id_customer], [id_discount], [id_pMethod], [totalPrice], [address], [pNumber])
-VALUES
-    (100000001, 400000001, 2001, 1200, N'123 Main St', '1234567890'),
-    (100000002, 400000002, 2002, 800, N'456 Oak Ave', '9876543210'),
-    (100000003, 400000003, 2003, 1500, N'789 Pine Ln', '1112233445'),
-    (100000004, 400000004, 2001, 500, N'101 Elm St', '9988776655'),
-    (100000005, 400000005, 2002, 1000, N'202 Maple Dr', '1122334455');
-GO
-
--- Select all data from [Order] to verify
--- SELECT * FROM [Order];
-
--- Insert 2 tuples of sample data for each id_order into [OrderItem] table
-INSERT INTO [OrderItem] ([id_order], [id_product], [quantity], [totalPrice], [status], [rated])
-VALUES
-    -- Order 500000001
-    (500000001, 300000001, 2, 240, 'Waiting', 'No'),
-    (500000001, 300000002, 1, 180, 'Confirmed', 'No'),
-
-    -- Order 500000002
-    (500000002, 300000003, 3, 300, 'Confirmed', 'No'),
-    (500000002, 300000004, 2, 200, 'Waiting', 'No'),
-
-    -- Order 500000003
-    (500000003, 300000005, 1, 150, 'Waiting', 'No'),
-    (500000003, 300000006, 4, 400, 'Confirmed', 'No'),
-
-    -- Order 500000004
-    (500000004, 300000007, 2, 100, 'Waiting', 'No'),
-    (500000004, 300000008, 1, 50, 'Confirmed', 'No'),
-
-    -- Order 500000005
-    (500000005, 300000009, 3, 300, 'Confirmed', 'No'),
-    (500000005, 300000010, 2, 200, 'Waiting', 'No');
-GO
--- Select all data from [OrderItem] to verify
--- SELECT * FROM [OrderItem];
-
--- Insert data into the Bill table
-INSERT INTO [Bill] ([id_order], [id_customer], [totalPrice], [address], [pNumber], [time])
-VALUES
-    (500000001, 100000001, 500, '123 Main St', '555-1234', '2023-01-15'),
-    (500000002, 100000002, 750, '456 Oak St', '555-5678', '2023-01-16'),
-    (500000003, 100000003, 600, '789 Pine St', '555-9012', '2023-01-17'),
-    (500000004, 100000004, 900, '321 Elm St', '555-3456', '2023-01-18'),
-    (500000005, 100000005, 800, '654 Birch St', '555-7890', '2023-01-19');
-GO
-
--- SELECT * FROM [Bill];
-
 -- Insert sample data into [DeliveryService]
 INSERT INTO [DeliveryService] ([name])
 VALUES
-    (N'Delivery Express'),
-    (N'Standard Delivery'),
-    (N'Next Day Delivery');
+    (N'Giao Hàng Nhanh'),
+    (N'Viettel Post'),
+    (N'GrabExpress'),
+    (N'J&T Express'),
+    (N'NowShip');
 GO
 -- Insert sample data into [DeliveryServiceEmail]
 INSERT INTO [DeliveryServiceEmail] ([id_delivery], [email])
 VALUES
-    (700000001, 'express@delivery.com'),
-    (700000002, 'standard@delivery.com'),
-    (700000003, 'nextday@delivery.com');
+    (700000001, 'GHN@gmail.com'),
+    (700000002, 'VTP@gmail.com'),
+    (700000003, 'GRAB@gmail.com'),
+    (700000004, 'JnT@gmail.com'),
+    (700000005, 'NowShip@gmail.com');
 GO
 -- Insert sample data into [DeliveryServiceAddress]
 INSERT INTO [DeliveryServiceAddress] ([id_delivery], [address])
 VALUES
-    (700000001, 'Express Delivery HQ, City'),
-    (700000002, 'Standard Delivery Office, Town'),
-    (700000003, 'Next Day Delivery Center, Village');
+    (700000001, N'123 Đường Hùng Vương, Quận Hải Châu, Thành phố Đà Nẵng'),
+    (700000002, N'456 Đường Lê Lợi, Quận Ngũ Hành Sơn, Thành phố Đà Nẵng'),
+    (700000003, N'789 Đường Nguyễn Sinh Cung, Quận Cẩm Lệ, Thành phố Đà Nẵng'),
+    (700000004, N'101 Đường Trưng Nữ Vương, Quận Sơn Trà, Thành phố Đà Nẵng'),
+    (700000005, N'222 Đường Điện Biên Phủ, Quận Liên Chiểu, Thành phố Đà Nẵng');
 GO
 -- Insert sample data into [DeliveryServicePNumber]
 INSERT INTO [DeliveryServicePNumber] ([id_delivery], [pNumber])
 VALUES
-    (700000001, '1234567890'),
-    (700000002, '9876543210'),
-    (700000003, '1112233445');
+    (700000001, '0983115577'),
+    (700000002, '0381777888'),
+    (700000003, '0913555777'),
+    (700000004, '0168666888'),
+    (700000005, '0975987687');
 GO
 -- Select all data from [DeliveryService], [DeliveryServiceEmail], [DeliveryServiceAddress], and [DeliveryServicePNumber] to verify
 -- SELECT * FROM [DeliveryService];
@@ -250,11 +190,89 @@ GO
 -- SELECT * FROM [DeliveryServiceAddress];
 -- SELECT * FROM [DeliveryServicePNumber];
 
+INSERT INTO [CartItem] ([id_user], [id_product], [quantity], [totalPrice])
+VALUES
+    (100000001, 300000001, 2, 5000000),  -- Bàn Phím Logitech G Pro X
+    (100000001, 300000002, 1, 800000),   -- Chuột Gaming Logitech G502
+    (100000001, 300000003, 3, 3600000),  -- Tai Nghe Logitech G Pro X
+    (100000002, 300000004, 2, 50000),  -- Bánh Mì Gà Nướng Phô Mai
+    (100000002, 300000005, 1, 40000),  -- Cà Phê Sữa Đá
+    (100000002, 300000006, 3, 540000), -- Pizza NowSaiGon
+    (100000003, 300000007, 1, 490000), -- Bàn Là Hơi Nước
+    (100000003, 300000008, 2, 720000), -- Nồi Cơm Điện
+    (100000003, 300000009, 1, 120000), -- Chảo Chống Dính
+    (100000004, 300000001, 3, 7500000), -- Sản phẩm khác cho cửa hàng 200000003
+    (100000004, 300000002, 1, 800000),  -- Sản phẩm khác cho cửa hàng 200000003
+    (100000004, 300000003, 2, 2400000),  -- Sản phẩm khác cho cửa hàng 200000003
+    (100000005, 300000001, 1, 2500000), -- Bàn Phím Logitech G Pro X
+    (100000005, 300000002, 2, 1600000), -- Chuột Gaming Logitech G502
+    (100000005, 300000003, 3, 3600000); -- Tai Nghe Logitech G Pro X
+GO
+-- SELECT * FROM [CartItem]
+
+-- Insert sample data into [Order] table
+INSERT INTO [Order] ([id_customer], [id_discount], [id_pMethod], [address], [pNumber])
+VALUES
+    (100000001, 400000001, 2001, N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM', '0918827371'),
+    (100000002, 400000003, 2003, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội', '0989671562'),
+    (100000003, 400000005, 2005, N'123 đường Nguyễn Văn Linh, Q.7, Tp.HCM', '0912345678'),
+    (100000004, 400000002, 2002, N'456 đường Lê Lợi, Q.1, Tp.HCM', '0909876543'),
+    (100000005, 400000004, 2004, N'789 đường Cách Mạng Tháng Tám, Q.3, Tp.HCM', '0978563412');
+GO
+-- Select all data from [Order] to verify
+-- SELECT * FROM [Order];
+
+-- Insert of sample data for each id_order into [OrderItem] table
+INSERT INTO [OrderItem] ([id_order], [id_product], [quantity], [totalPrice])
+VALUES
+    (500000001, 300000001, 2, 5000000),
+    (500000001, 300000002, 1, 800000),
+    
+    (500000002, 300000003, 3, 3600000),
+    (500000002, 300000004, 2, 50000),
+    
+    (500000003, 300000005, 1, 40000),
+    (500000003, 300000006, 4, 720000),
+    
+    (500000004, 300000007, 2, 980000),
+    (500000004, 300000008, 1, 360000),
+    
+    (500000005, 300000009, 3, 360000);
+GO
+-- Select all data from [OrderItem] to verify
+-- SELECT * FROM [OrderItem];
+/*
+INSERT INTO [Rating] ([id_customer], [id_product], [detail], [ratingStar])
+VALUES
+GO
+-- Select all data from [Rating] to verify
+-- SELECT * FROM [Rating];
+
+-- Insert data into the Bill table
+INSERT INTO [Bill] ([id_order], [id_customer], [totalPrice], [address], [pNumber], [time])
+VALUES
+GO
+
+-- SELECT * FROM [Bill];
+
 -- Insert sample data into [Waybill] (for 2 orders)
 INSERT INTO [Waybill] ([id_bill], [id_delivery], [customerName], [customerPhone], [customerAddress], [dateStart], [datePredict])
 VALUES
-    (600000001, 700000001, N'John Doe', '1234567890', '123 Main St, City', GETDATE(), DATEADD(DAY, 4, GETDATE())),
-    (600000002, 700000002, N'Jane Smith', '9876543210', '456 Oak Ave, Town', GETDATE(), DATEADD(DAY, 4, GETDATE()));
 GO
 -- Select all data from [Waybill] to verify
 -- SELECT * FROM [Waybill];
+
+-- Insert sample data into [Rating] table
+INSERT INTO [Rating] ([id_customer], [id_product], [detail], [ratingStar])
+VALUES
+GO
+-- Select all data from [Rating] to verify
+-- SELECT * FROM [Rating];
+
+-- Insert sample data into [CartItem] table
+INSERT INTO [CartItem] ([id_user], [id_product], [quantity], [totalPrice])
+VALUES
+GO
+-- Select all data from [CartItem] to verify
+-- SELECT * FROM [CartItem];
+*/

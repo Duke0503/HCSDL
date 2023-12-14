@@ -43,7 +43,7 @@ BEGIN
 
     SET @id_discount = (SELECT TOP 1 [id_discount] FROM [Order] O WHERE O.[id_order] = @id_order);
 
-    IF (@id_discount IS NOT NULL)
+    IF (@id_discount <> 0)
     BEGIN
         DECLARE @id_category INT;
         DECLARE @discountPercent DECIMAL(5, 2);
@@ -56,7 +56,7 @@ BEGIN
         FROM [Discount] D
         WHERE D.[id_discount] = @id_discount;
 
-        IF @discountMoney IS NOT NULL
+        IF @discountMoney <> 0
             SET @discountValue = @discountMoney;
         ELSE
             SET @discountValue = @discountPercent * (
@@ -65,7 +65,7 @@ BEGIN
                 WHERE P.[id_category] = @id_category
             );
     END
-
+    IF @discountValue = NULL SET @discountValue = 0
     SET @result = @result - @discountValue;
 
     RETURN @result;
@@ -78,7 +78,7 @@ CREATE FUNCTION filter_product
     @searchString NVARCHAR(255),
     @id_category INT,
     @min_price INT = 0,
-    @max_price INT = 0,
+    @max_price INT = 1000000000,
     @searchType VARCHAR(10) = 'BestRating' -- 'BestRating' for best rating, 'BestSeller' for bestseller
 )
 RETURNS TABLE
@@ -207,6 +207,7 @@ RETURN
     SELECT 
         OI.[id_order],
         OI.[id_product],
+        P.[name],
         OI.[quantity],
         OI.[totalPrice],
         OI.[status]
@@ -227,6 +228,7 @@ RETURN
     SELECT 
         OI.[id_order],
         OI.[id_product],
+        P.[name],
         OI.[quantity],
         OI.[totalPrice],
         OI.[status]
@@ -247,6 +249,7 @@ RETURN
     SELECT 
         OI.[id_order],
         OI.[id_product],
+        P.[name],
         OI.[quantity],
         OI.[totalPrice],
         OI.[status]
@@ -279,8 +282,3 @@ RETURN
     )
 )
 GO
--- sample
-DECLARE @cart2 cartID
-insert into @cart2 
-VALUES (300000001)
-SELECT * from suitableDiscount(@cart2)
