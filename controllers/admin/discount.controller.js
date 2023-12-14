@@ -10,7 +10,6 @@ var selectDiscount = () => {
   });
 };
 
-// [GET] /admin/discount
 module.exports.index = async (req, res) => {
   try {
     let discountData = await selectDiscount();
