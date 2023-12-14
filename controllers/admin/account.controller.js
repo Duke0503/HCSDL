@@ -69,10 +69,10 @@ module.exports.index = async (req, res) => {
       });
     });
 
-    res.json(userData);
+    res.json({status: 200, data: userData});
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"})
   }
 };
 
@@ -92,7 +92,8 @@ module.exports.searchAccount = async (req, res) => {
     let name = req.params.name;
     let userData = await selectUserName(name);
     let emailData = await selectEmailData();
-    
+    let addData = await selectAddressData();
+    let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
       emailData.forEach(ele => {
@@ -100,12 +101,22 @@ module.exports.searchAccount = async (req, res) => {
           element.email.push(ele.email);
         };
       });
+      addData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.address.push(ele.address);
+        };
+      });
+      pNumData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.pNum.push(ele.pNumber);
+        };
+      });
     });
 
-    res.send(userData);
+    res.json({status: 200, data: userData});
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"})
   };
 };
 
@@ -124,6 +135,8 @@ module.exports.searchType = async (req, res) => {
     let ty = req.params.ty;
     let userData = await selectUserType(ty);
     let emailData = await selectEmailData();
+    let addData = await selectAddressData();
+    let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
       emailData.forEach(ele => {
@@ -131,12 +144,22 @@ module.exports.searchType = async (req, res) => {
           element.email.push(ele.email);
         };
       });
+      addData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.address.push(ele.address);
+        };
+      });
+      pNumData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.pNum.push(ele.pNumber);
+        };
+      });
     });
 
-    res.send(userData);
+    res.json({status: 200, data: userData});
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"});
   };
 };
 
@@ -160,6 +183,8 @@ module.exports.search = async (req, res) => {
     let ty = req.params.ty;
     let userData = await selectUserIf(na, ty);
     let emailData = await selectEmailData();
+    let addData = await selectAddressData();
+    let pNumData = await selectPnumData();
     userData.forEach(element => {
       element.email = [];
       emailData.forEach(ele => {
@@ -167,11 +192,35 @@ module.exports.search = async (req, res) => {
           element.email.push(ele.email);
         };
       });
+      addData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.address.push(ele.address);
+        };
+      });
+      pNumData.forEach(ele => {
+        if (element.id_user == ele.id_user){
+          element.pNum.push(ele.pNumber);
+        };
+      });
     });
 
-    res.send(userData);
+    res.json({status: 200, data: userData});
   } catch(e) {
     console.log(e);
-    res.status(500).send('Query Failed!');
+    res.json({status: 500, message: "Query Failed"});
   };
+};
+
+// [DELETE] /admin/delete/:id
+
+var tryDeleteUser = (id) => {
+  return new Promise((resolve, reject) => {
+    var q = new sql.Request()
+      .input('n', sql.VarChar, `%${id}%`);
+
+    q.query("select * from Users where name LIKE @n and usertype LIKE @t", (err, rc) => {
+      if (err) return reject(err);
+      else return resolve(rc.recordset);
+    });
+  });
 };
