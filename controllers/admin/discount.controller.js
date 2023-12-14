@@ -22,8 +22,6 @@ module.exports.index = async (req, res) => {
   };
 };
 
-let discountID = 400000006;
-
 // [POST] /admin/discount/create
 module.exports.addDiscount = (req, res) => {
   try {
