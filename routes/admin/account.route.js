@@ -11,4 +11,6 @@ router.get("/search/type/:ty", controller.searchType);
 
 router.get("/search/:name/:ty", controller.search);
 
+router.delete("/deleteUser/:id", controller.tmpDelete);
+
 module.exports = router;

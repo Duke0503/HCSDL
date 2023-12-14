@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const moment = require("moment");
 
@@ -18,6 +19,8 @@ database.connect();
 
 const app = express();
 const PORT = process.env.PORT;
+
+app.use(cors());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:4000");
