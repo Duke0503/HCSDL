@@ -25,3 +25,5 @@ module.exports.index = async (req, res) => {
     res.status(500).send('Query Failed!');
   }
 }
+
+// [POST] /cart
