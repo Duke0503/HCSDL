@@ -161,14 +161,14 @@ GO
 -- SELECT * FROM [Rating];
 
 -- Insert 5 tuples of sample data into [CartItem] table
-INSERT INTO [CartItem] ([id_user], [id_product], [quantity], [totalPrice])
-VALUES
-    (100000001, 300000001, 1, 26000000),  -- 1 laptops in the cart
-    (100000002, 300000002, 3, 897000),    -- 3 T-shirts in the cart
-    (100000003, 300000003, 1, 2800000),   -- 1 sofa set in the cart
-    (100000004, 300000004, 2, 192000),    -- 5 mystery novels in the cart
-    (100000005, 300000005, 2, 300000);   -- 2 tennis rackets in the cart
-GO
+-- INSERT INTO [CartItem] ([id_user], [id_product], [quantity], [totalPrice])
+-- VALUES
+--     (100000001, 300000001, 1, 26000000),  -- 1 laptops in the cart
+--     (100000002, 300000002, 3, 897000),    -- 3 T-shirts in the cart
+--     (100000003, 300000003, 1, 2800000),   -- 1 sofa set in the cart
+--     (100000004, 300000004, 2, 192000),    -- 5 mystery novels in the cart
+--     (100000005, 300000005, 2, 300000);   -- 2 tennis rackets in the cart
+-- GO
 -- Select all data from [CartItem] to verify
 -- SELECT * FROM [CartItem];
 
@@ -195,51 +195,51 @@ GO
 -- SELECT * FROM [PaymentMethod];
 
 -- Insert 5 tuples of sample data into [Order] table
-INSERT INTO [Order] ([id_customer], [id_discount], [id_pMethod], [totalPrice], [address], [pNumber])
-VALUES
-    (100000001, 400000001, 2001, 26299000, N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM', '0918827371'),
-    (100000002, 400000002, 2002, 8592000, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội', '0987126361'),
-    (100000003, 400000003, 2003, 2686000, N'Đường số 13, Tân Thuận Đông, Q.7, Tp.HCM', '0989671562'),
-    (100000004, 400000004, 2001, 2947000, N'15 đường D5 phường 25, Q.Bình Thạnh, Tp.HCM', '0912831623'),
-    (100000005, 400000005, 2002, 587000, N'15 đường Trần Phú, phường 3, Tp.Đà Lạt, Lâm Đồng', '0371892342');
-GO
+-- INSERT INTO [Order] ([id_customer], [id_discount], [id_pMethod], [totalPrice], [address], [pNumber])
+-- VALUES
+--     (100000001, 400000001, 2001, 26299000, N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM', '0918827371'),
+--     (100000002, 400000002, 2002, 8592000, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội', '0987126361'),
+--     (100000003, 400000003, 2003, 2686000, N'Đường số 13, Tân Thuận Đông, Q.7, Tp.HCM', '0989671562'),
+--     (100000004, 400000004, 2001, 2947000, N'15 đường D5 phường 25, Q.Bình Thạnh, Tp.HCM', '0912831623'),
+--     (100000005, 400000005, 2002, 587000, N'15 đường Trần Phú, phường 3, Tp.Đà Lạt, Lâm Đồng', '0371892342');
+-- GO
 -- Select all data from [Order] to verify
 -- SELECT * FROM [Order];
 -- Insert 2 tuples of sample data for each id_order into [OrderItem] table
-INSERT INTO [OrderItem] ([id_order], [id_product], [quantity], [totalPrice], [status], [rated])
-VALUES
-    -- Order 500000001
-    (500000001, 300000001, 1, 26000000, 'Waiting', 'No'),
-    (500000001, 300000002, 1, 299000, 'Confirmed', 'No'),
+-- INSERT INTO [OrderItem] ([id_order], [id_product], [quantity], [totalPrice], [status], [rated])
+-- VALUES
+--     -- Order 500000001
+--     (500000001, 300000001, 1, 26000000, 'Waiting', 'No'),
+--     (500000001, 300000002, 1, 299000, 'Confirmed', 'No'),
 
-    -- Order 500000002
-    (500000002, 300000003, 3, 8400000, 'Confirmed', 'No'),
-    (500000002, 300000004, 2, 192000, 'Waiting', 'No'),
+--     -- Order 500000002
+--     (500000002, 300000003, 3, 8400000, 'Confirmed', 'No'),
+--     (500000002, 300000004, 2, 192000, 'Waiting', 'No'),
 
-    -- Order 500000003
-    (500000003, 300000005, 1, 150000, 'Waiting', 'No'),
-    (500000003, 300000006, 4, 2536000, 'Confirmed', 'No'),
+--     -- Order 500000003
+--     (500000003, 300000005, 1, 150000, 'Waiting', 'No'),
+--     (500000003, 300000006, 4, 2536000, 'Confirmed', 'No'),
 
-    -- Order 500000004
-    (500000004, 300000007, 1, 1150000, 'Waiting', 'No'),
-    (500000004, 300000008, 3, 1797000, 'Confirmed', 'No'),
+--     -- Order 500000004
+--     (500000004, 300000007, 1, 1150000, 'Waiting', 'No'),
+--     (500000004, 300000008, 3, 1797000, 'Confirmed', 'No'),
 
-    -- Order 500000005
-    (500000005, 300000009, 3, 417000, 'Confirmed', 'No'),
-    (500000005, 300000010, 2, 170000, 'Waiting', 'No');
-GO
+--     -- Order 500000005
+--     (500000005, 300000009, 3, 417000, 'Confirmed', 'No'),
+--     (500000005, 300000010, 2, 170000, 'Waiting', 'No');
+-- GO
 -- Select all data from [OrderItem] to verify
 -- SELECT * FROM [OrderItem];
 
 -- Insert data into the Bill table
-INSERT INTO [Bill] ([id_order], [id_customer], [totalPrice], [address], [pNumber], [time])
-VALUES
-    (500000001, 100000001, 26299000,  N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM', '0918827371', '2023-12-15'),
-    (500000002, 100000002, 8592000, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội', '0987126361', '2023-12-16'),
-    (500000003, 100000003, 2686000,  N'Đường số 13, Tân Thuận Đông, Q.7, Tp.HCM', '0989671562', '2023-12-17'),
-    (500000004, 100000004, 2947000, N'15 đường D5 phường 25, Q.Bình Thạnh, Tp.HCM', '2023-12-18'),
-    (500000005, 100000005, 587000,  N'15 đường Trần Phú, phường 3, Tp.Đà Lạt, Lâm Đồng', '2023-12-19');
-GO
+-- INSERT INTO [Bill] ([id_order], [id_customer], [totalPrice], [address], [pNumber], [time])
+-- VALUES
+--     (500000001, 100000001, 26299000,  N'268 đường Lý Thường Kiệt, Q.10, Tp.HCM', '0918827371', '2023-12-15'),
+--     (500000002, 100000002, 8592000, N'1 đường Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội', '0987126361', '2023-12-16'),
+--     (500000003, 100000003, 2686000,  N'Đường số 13, Tân Thuận Đông, Q.7, Tp.HCM', '0989671562', '2023-12-17'),
+--     (500000004, 100000004, 2947000, N'15 đường D5 phường 25, Q.Bình Thạnh, Tp.HCM', '2023-12-18'),
+--     (500000005, 100000005, 587000,  N'15 đường Trần Phú, phường 3, Tp.Đà Lạt, Lâm Đồng', '2023-12-19');
+-- GO
 -- SELECT * FROM [Bill];
 
 -- Insert sample data into [DeliveryService]
