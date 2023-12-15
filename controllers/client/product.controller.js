@@ -32,10 +32,10 @@ module.exports.index = async (req, res) => {
       Product: productData,
     };
 
-    res.json(responseData);
+    res.status(200).json({ status: 200, data: responseData });
   } catch (e) {
     console.log(e);
-    res.status(500).send("Query Failed!");
+    res.status(500).json({ status: 200, message: "query Faild" });
   }
 };
 
@@ -69,10 +69,10 @@ module.exports.detail = async (req, res) => {
       ProductDetail: productDetail,
       ProductRating: productRating,
     };
-    res.json(data);
+    res.status(200).json({ status: 200, data: data });
   } catch (e) {
     console.log(e);
-    res.status(500).send("Query Failed!");
+    res.status(500).json({ status: 200, message: "query Faild" });
   }
 };
 
@@ -122,9 +122,9 @@ module.exports.filter = async (req, res) => {
       searchType
     );
 
-    res.json({ products: products });
+    res.status(200).json({ status: 200, data: products });
   } catch (e) {
     console.log(e);
-    res.status(500).send("Query Failed!");
+    res.status(500).json({ status: 200, message: "query Faild" });
   }
 };
