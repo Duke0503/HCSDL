@@ -5,9 +5,11 @@ const controller = require("../../controllers/client/order-history.controller");
 
 router.get("/:id", controller.index);
 
-router.get("/:id/orders", controller.index);
+router.get("/bills/:id", controller.getBill);
 
-router.get("/:id/bills", controller.bills);
+router.get("/prodPurchased/:id", controller.purchasedProd);
+
+// router.get("/:id/bills", controller.tmp);
 
 router.post("/addComment", controller.addComment);
 
